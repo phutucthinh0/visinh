@@ -5,7 +5,11 @@ var dem = 0;
 var list = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]
 list= shuffle(list)
 function run(){
-    loadqa(list[dem])
+    if (getCookie("login")==""){
+        qa.innerText = "access expired \u26A0 \nlogin unsuccessful"
+    }else{
+        loadqa(list[dem])
+    }
 }
 function loadqa(number){
     img.src="img/"+number+".jpg"
@@ -69,4 +73,25 @@ function shuffle(a) {
         a[j] = x;
     }
     return a;
+}
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length,c.length);
+        }
+    }
+    return "";
+}
+function login() {
+    var d = new Date();
+    d.setTime(d.getTime() + (5*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = "login" + "=" + "on" + "; " + expires;
+    location.reload(true);
 }
