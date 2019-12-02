@@ -7,6 +7,7 @@ list= shuffle(list)
 function run(){
     if (getCookie("login")==""){
         qa.innerText = "access expired \u26A0 \nlogin unsuccessful"
+        window.location.replace("login.html");
     }else{
         loadqa(list[dem])
     }
